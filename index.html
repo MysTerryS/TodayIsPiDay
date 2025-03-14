@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестирование по охране труда</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: auto; }
+        .question { margin-bottom: 15px; }
+        .result { font-weight: bold; margin-top: 20px; }
+        #authContainer, #adminPanel { text-align: center; margin-top: 50px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        table, th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .back-btn { margin-top: 20px; padding: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <!-- Блок авторизации -->
+    <div id="authContainer">
+        <h2>Введите логин и пароль</h2>
+        <input type="text" id="usernameInput" placeholder="Логин"><br><br>
+        <input type="password" id="passwordInput" placeholder="Пароль"><br><br>
+        <button onclick="checkCredentials('employee')">Войти как сотрудник</button>
+        <button onclick="checkCredentials('admin')">Войти как администратор</button>
+        <p id="authMessage" style="color: red;"></p>
+    </div>
+
+    <!-- Блок тестирования -->
+    <div id="quizContainer" style="display: none;">
+        <h2>Тестирование</h2>
+        <label for="userInitials">Введите инициалы:</label>
+        <input type="text" id="userInitials" placeholder="АБВ">
+        <button onclick="checkUserStatus()">Начать тест</button>
+
+        <form id="quizForm" style="display: none;">
+            <div id="questionsContainer"></div>
+            <button type="button" onclick="submitQuiz()">Завершить тест</button>
+        </form>
+
+        <p class="result" id="result"></p>
+        <button class="back-btn" onclick="goBack()">Назад</button>
+    </div>
+
+    <!-- Блок управления сотрудниками (админка) -->
+    <div id="adminPanel" style="display: none;">
+        <h2>Управление сотрудниками</h2>
+        
+        <h3>Добавить сотрудника</h3>
+        <input type="text" id="newUsername" placeholder="Логин">
+        <input type="password" id="newPassword" placeholder="Пароль">
+        <input type="number" id="newAttempts" placeholder="Количество попыток" min="1" value="3">
+        <button onclick="addEmployee()">Добавить</button>
+        
+        <h3>Список сотрудников</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Логин</th>
+                    <th>Попытки</th>
+                    <th>Тест сдан</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody id="employeeTable"></tbody>
+        </table>
+
+        <button class="back-btn" onclick="goBack()">Назад</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
