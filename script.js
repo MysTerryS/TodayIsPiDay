@@ -1246,7 +1246,7 @@ function submitQuiz() {
         else
             status = "Нет";
         alert(data.message || `Тест сдан: ${status}, осталось попыток: ${data.counts}`);
-        document.getElementById("result").innerText = `${username}, вы набрали ${score} из ${selectedQuestions.length} баллов.`;
+        alert(`${username}, вы набрали ${score} из ${selectedQuestions.length} баллов.`);
         goBack();
     })
     .catch(error => {
