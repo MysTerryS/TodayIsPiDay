@@ -1,9 +1,10 @@
+const SERVER_URL = "http://192.168.101.16:3000";
 // 🔹 Проверка логина и пароля с учётом роли (сотрудник/админ)
 function checkCredentials(role) {
     const username = document.getElementById("usernameInput").value;
     const password = document.getElementById("passwordInput").value;
 
-    fetch("http://localhost:3000/login", {
+    fetch("${SERVER_URL}/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
@@ -42,7 +43,7 @@ function goBack() {
 
 // 🔹 Загрузка списка сотрудников
 function loadEmployees() {
-    fetch("http://localhost:3000/employees")
+    fetch("${SERVER_URL}/employees")
     .then(response => response.json())
     .then(data => {
         const table = document.getElementById("employeeTable");
@@ -71,7 +72,7 @@ function addEmployee() {
     const password = document.getElementById("newPassword").value;
     const attempts = document.getElementById("newAttempts").value;
 
-    fetch("http://localhost:3000/add-employee", {
+    fetch("${SERVER_URL}/add-employee", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password, attempts })
@@ -86,14 +87,14 @@ function addEmployee() {
 
 // 🔹 Увеличение количества попыток
 function updateAttempts(username) {
-    fetch(`http://localhost:3000/update-attempts/${username}`, { method: "PUT" })
+    fetch(`${SERVER_URL}/update-attempts/${username}`, { method: "PUT" })
     .then(() => loadEmployees()) // Перезагружаем список
     .catch(error => console.error("Ошибка обновления попыток:", error));
 }
 
 // 🔹 Удаление сотрудника
 function deleteEmployee(username) {
-    fetch(`http://localhost:3000/delete-employee/${username}`, { method: "DELETE" })
+    fetch(`${SERVER_URL}/delete-employee/${username}`, { method: "DELETE" })
     .then(() => loadEmployees()) // Перезагружаем список
     .catch(error => console.error("Ошибка удаления сотрудника:", error));
 }
@@ -107,7 +108,7 @@ function checkUserStatus() {
         return;
     }
 
-    fetch(`http://localhost:3000/user/${username}`)
+    fetch(`${SERVER_URL}/user/${username}`)
     .then(response => response.json())
     .then(data => {
         if (!data.success) {
@@ -1231,7 +1232,7 @@ function submitQuiz() {
 
     let requiredScore = Math.ceil(selectedQuestions.length * PASS_THRESHOLD);
 
-    fetch("http://localhost:3000/submit-test", {
+    fetch("${SERVER_URL}/submit-test", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, score })
@@ -1255,7 +1256,7 @@ function submitQuiz() {
 }
 
 function submitTest(username, score) {
-    fetch("http://localhost:3000/submit-test", {
+    fetch("${SERVER_URL}/submit-test", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, score })
