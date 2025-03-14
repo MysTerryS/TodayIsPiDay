@@ -1,4 +1,4 @@
-const SERVER_URL = "http://192.168.101.16:3000";
+const SERVER_URL = "http://93.171.64.226:3000";
 // 🔹 Проверка логина и пароля с учётом роли (сотрудник/админ)
 function checkCredentials(role) {
     const username = document.getElementById("usernameInput").value;
