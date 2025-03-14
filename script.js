@@ -28,6 +28,7 @@ function checkCredentials(role) {
         }
     })
     .catch(error => {
+        console.error("${SERVER_URL}/login");
         console.error("Ошибка при входе:", error);
         alert("Ошибка соединения с сервером!");
     });
