@@ -4,7 +4,7 @@ function checkCredentials(role) {
     const username = document.getElementById("usernameInput").value;
     const password = document.getElementById("passwordInput").value;
 
-    fetch("${SERVER_URL}/login", {
+    fetch(`${SERVER_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
@@ -44,7 +44,7 @@ function goBack() {
 
 // 🔹 Загрузка списка сотрудников
 function loadEmployees() {
-    fetch("${SERVER_URL}/employees")
+    fetch(`${SERVER_URL}/employees`)
     .then(response => response.json())
     .then(data => {
         const table = document.getElementById("employeeTable");
@@ -73,7 +73,7 @@ function addEmployee() {
     const password = document.getElementById("newPassword").value;
     const attempts = document.getElementById("newAttempts").value;
 
-    fetch("${SERVER_URL}/add-employee", {
+    fetch(`${SERVER_URL}/add-employee`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password, attempts })
@@ -1233,7 +1233,7 @@ function submitQuiz() {
 
     let requiredScore = Math.ceil(selectedQuestions.length * PASS_THRESHOLD);
 
-    fetch("${SERVER_URL}/submit-test", {
+    fetch(`${SERVER_URL}/submit-test`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, score })
@@ -1257,7 +1257,7 @@ function submitQuiz() {
 }
 
 function submitTest(username, score) {
-    fetch("${SERVER_URL}/submit-test", {
+    fetch(`${SERVER_URL}/submit-test`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, score })
