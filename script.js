@@ -1,4 +1,4 @@
-const SERVER_URL = "http://93.171.64.226:3000";
+const SERVER_URL = "https://todayispiday.onrender.com/";
 // 🔹 Проверка логина и пароля с учётом роли (сотрудник/админ)
 function checkCredentials(role) {
     const username = document.getElementById("usernameInput").value;
