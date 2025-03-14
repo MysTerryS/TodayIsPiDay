@@ -7,11 +7,17 @@ app.use(express.json());
 app.use(cors());
 
 const pool = new Pool({
-    user: "postgres",
-    host: "localhost",
-    database: "labor",
-    password: "qwerty",
-    port: 5432,
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false } // Нужно для Render
+});
+
+app.get("/test-db", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT NOW()");
+    res.json({ success: true, time: result.rows[0] });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 app.post("/login", (req, res) => {
@@ -127,6 +133,5 @@ app.delete("/delete-employee/:username", (req, res) => {
         .catch(error => res.status(500).json({ error: "Ошибка сервера" }));
 });
 
-app.listen(3000, "0.0.0.0", () => {
-    console.log('Сервер запущен на порту 3000');
-});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
